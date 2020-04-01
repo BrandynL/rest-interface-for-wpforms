@@ -68,15 +68,14 @@ class Rest_Interface_For_Wpforms_Public
 			&& !empty(trim(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->endpoint)) // endpoint is set 
 		) {
 			try {
-				$ch = curl_init(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->endpoint);
-				curl_setopt($ch, CURLOPT_POST, 1);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($entry));
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-				curl_setopt($ch, CURLOPT_HEADER, 0);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-				$resp = curl_exec($ch);
-				curl_close($ch);
+				$args = [
+					'method' => 'POST',
+					'body' => json_encode($entry),
+				];
+				$resp = wp_remote_post(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->endpoint, $args);
+				if (is_wp_error($resp)) {
+					eror_Log($resp->get_error_message());
+				}
 			} catch (\Exception $e) {
 				error_log($e->getMessage());
 			}
