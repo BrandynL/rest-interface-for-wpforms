@@ -1,4 +1,4 @@
-=== WPForms REST Interface ===
+=== REST Interface for WPForms ===
 Donate link: https://brandynlordi.com
 Contributors: brandynl
 Tags: WPForms, REST, API
@@ -20,7 +20,7 @@ This is typically used for sending wpforms submissions to a third-party CRM or a
 == Installation ==
 
 1. Ensure you have WPForms installed - this plugin will activate work otherwise.
-1. Upload `wpforms-rest-interface.php` to the `/wp-content/plugins/` directory
+1. Upload `rest-interface-for-wpforms.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Navigate to 'WPForms REST' in the WPForms submenu
 
@@ -32,6 +32,9 @@ Coming soon
 1. The admin interface view
 
 == Changelog ==
+
+= 1.0.1 =
+* Plugin rename and bugfixes
 
 = 1.0 =
 * Initial plugin released

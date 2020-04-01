@@ -6,8 +6,8 @@
  * @link       https://brandynlordi.com
  * @since      1.0.0
  *
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/public
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/public
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/public
  * @author     Brandyn Lordi <Brandyn.lordi@gmail.com>
  */
-class Wpforms_Rest_Interface_Public
+class Rest_Interface_For_Wpforms_Public
 {
 
 	/**
@@ -61,11 +61,14 @@ class Wpforms_Rest_Interface_Public
 	 *
 	 * @since    1.0.0
 	 */
-	public function wpforms_rest_interface_wpforms_submit_hook($fields,  $entry,  $form_id,  $form_data)
+	public function rest_interface_for_wpforms_submit_hook($fields,  $entry,  $form_id,  $form_data)
 	{
-		if (isset(Wpforms_Rest_Interface::get_wpforms_rest_interface_post_settings()->{$form_id})) {
+		if (
+			isset(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->{$form_id}) // current form is enabled
+			&& !empty(trim(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->endpoint)) // endpoint is set 
+		) {
 			try {
-				$ch = curl_init(Wpforms_Rest_Interface::get_wpforms_rest_interface_post_settings()->endpoint);
+				$ch = curl_init(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->endpoint);
 				curl_setopt($ch, CURLOPT_POST, 1);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($entry));
 				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);

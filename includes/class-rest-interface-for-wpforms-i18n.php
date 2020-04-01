@@ -9,8 +9,8 @@
  * @link       https://brandynlordi.com
  * @since      1.0.0
  *
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/includes
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/includes
  */
 
 /**
@@ -20,11 +20,12 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/includes
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/includes
  * @author     Brandyn Lordi <Brandyn.lordi@gmail.com>
  */
-class Wpforms_Rest_Interface_i18n {
+class Rest_Interface_For_Wpforms_i18n
+{
 
 
 	/**
@@ -32,16 +33,13 @@ class Wpforms_Rest_Interface_i18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_textdomain() {
+	public function load_plugin_textdomain()
+	{
 
 		load_plugin_textdomain(
-			'wpforms-rest-interface',
+			'rest-interface-for-wpforms',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
 		);
-
 	}
-
-
-
 }

@@ -22,7 +22,7 @@
  * @link       https://brandynlordi.com
  * @since      1.0.0
  *
- * @package    Wpforms_Rest_Interface
+ * @package    Rest_Interface_For_Wpforms
  */
 
 // If uninstall not called from WordPress, then exit.
@@ -30,6 +30,6 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 	exit;
 }
 
-if (defined('WPFORMS_INTERFACE_OPTION_SLUG')) {
-	delete_option('WPFORMS_INTERFACE_OPTION_SLUG');
+if (defined('REST_INTERFACE_FOR_WPFORMS_OPTION_SLUG')) {
+	delete_option(REST_INTERFACE_FOR_WPFORMS_OPTION_SLUG);
 }

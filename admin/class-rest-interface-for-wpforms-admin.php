@@ -6,8 +6,8 @@
  * @link       https://brandynlordi.com
  * @since      1.0.0
  *
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/admin
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/admin
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/admin
  * @author     Brandyn Lordi <Brandyn.lordi@gmail.com>
  */
-class Wpforms_Rest_Interface_Admin
+class Rest_Interface_For_Wpforms_Admin
 {
 
 	/**
@@ -62,7 +62,7 @@ class Wpforms_Rest_Interface_Admin
 	 */
 	public function enqueue_styles()
 	{
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wpforms-rest-interface-admin.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/rest-interface-for-wpforms-admin.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -72,22 +72,22 @@ class Wpforms_Rest_Interface_Admin
 	 */
 	public function enqueue_scripts()
 	{
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wpforms-rest-interface-admin.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/rest-interface-for-wpforms-admin.js', array('jquery'), $this->version, false);
 	}
 
 	/**
 	 * Register a custom menu page.
 	 */
-	public function wpforms_rest_interface_custom_menu_page()
+	public function rest_interface_for_wpforms_custom_menu_page()
 	{
 		add_submenu_page(
 			'wpforms-overview',
-			'WPForms Rest Interface',
+			'REST Interface for WPForms',
 			'REST Interface',
 			'manage_options',
 			$this->plugin_name,
 			function () {
-				require(plugin_dir_path(__FILE__) . 'partials/wpforms-rest-interface-admin-display.php');
+				require(plugin_dir_path(__FILE__) . 'partials/rest-interface-for-wpforms-admin-display.php');
 			},
 			null
 		);
@@ -99,10 +99,14 @@ class Wpforms_Rest_Interface_Admin
 	 * @since     1.0.0
 	 * @return    bool    result of the attempted option update
 	 */
-	public function update_wpforms_rest_post_settings($data)
+	public function update_rest_interface_for_wpforms_post_settings($data)
 	{
-		if (defined('WPFORMS_INTERFACE_OPTION_SLUG')) {
-			return update_option(WPFORMS_INTERFACE_OPTION_SLUG, $data);
+		if (defined('REST_INTERFACE_FOR_WPFORMS_OPTION_SLUG')) {
+			// trim all the strings before we save them to the database
+			$data = array_map(function ($value) {
+				return trim($value);
+			}, $data);
+			return update_option(REST_INTERFACE_FOR_WPFORMS_OPTION_SLUG, json_encode($data));
 		}
 		return false;
 	}

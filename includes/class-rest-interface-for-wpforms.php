@@ -9,8 +9,8 @@
  * @link       https://brandynlordi.com
  * @since      1.0.0
  *
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/includes
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Wpforms_Rest_Interface
- * @subpackage Wpforms_Rest_Interface/includes
+ * @package    Rest_Interface_For_Wpforms
+ * @subpackage Rest_Interface_For_Wpforms/includes
  * @author     Brandyn Lordi <Brandyn.lordi@gmail.com>
  */
-class Wpforms_Rest_Interface
+class Rest_Interface_For_Wpforms
 {
 
 	/**
@@ -36,7 +36,7 @@ class Wpforms_Rest_Interface
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Wpforms_Rest_Interface_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Rest_Interface_For_Wpforms_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -65,7 +65,7 @@ class Wpforms_Rest_Interface
 	 * @access   protected
 	 * @var      string    $version    The stored settings for the post actions.
 	 */
-	protected $wpforms_rest_interface_post_settings;
+	protected $rest_interface_for_wpforms_post_settings;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -78,12 +78,12 @@ class Wpforms_Rest_Interface
 	 */
 	public function __construct()
 	{
-		if (defined('WPFORMS_REST_INTERFACE_VERSION')) {
-			$this->version = WPFORMS_REST_INTERFACE_VERSION;
+		if (defined('REST_INTERFACE_FOR_WPFORMS_VERSION')) {
+			$this->version = REST_INTERFACE_FOR_WPFORMS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'wpforms-rest-interface';
+		$this->plugin_name = 'rest-interface-for-wpforms';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -96,10 +96,10 @@ class Wpforms_Rest_Interface
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Wpforms_Rest_Interface_Loader. Orchestrates the hooks of the plugin.
-	 * - Wpforms_Rest_Interface_i18n. Defines internationalization functionality.
-	 * - Wpforms_Rest_Interface_Admin. Defines all hooks for the admin area.
-	 * - Wpforms_Rest_Interface_Public. Defines all hooks for the public side of the site.
+	 * - Rest_Interface_For_Wpforms_Loader. Orchestrates the hooks of the plugin.
+	 * - Rest_Interface_For_Wpforms_i18n. Defines internationalization functionality.
+	 * - Rest_Interface_For_Wpforms_Admin. Defines all hooks for the admin area.
+	 * - Rest_Interface_For_Wpforms_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -114,32 +114,32 @@ class Wpforms_Rest_Interface
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wpforms-rest-interface-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-rest-interface-for-wpforms-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wpforms-rest-interface-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-rest-interface-for-wpforms-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-wpforms-rest-interface-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-rest-interface-for-wpforms-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wpforms-rest-interface-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-rest-interface-for-wpforms-public.php';
 
-		$this->loader = new Wpforms_Rest_Interface_Loader();
+		$this->loader = new Rest_Interface_For_Wpforms_Loader();
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Wpforms_Rest_Interface_i18n class in order to set the domain and to register the hook
+	 * Uses the Rest_Interface_For_Wpforms_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -148,7 +148,7 @@ class Wpforms_Rest_Interface
 	private function set_locale()
 	{
 
-		$plugin_i18n = new Wpforms_Rest_Interface_i18n();
+		$plugin_i18n = new Rest_Interface_For_Wpforms_i18n();
 
 		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
@@ -163,11 +163,11 @@ class Wpforms_Rest_Interface
 	private function define_admin_hooks()
 	{
 
-		$plugin_admin = new Wpforms_Rest_Interface_Admin($this->get_plugin_name(), $this->get_version());
+		$plugin_admin = new Rest_Interface_For_Wpforms_Admin($this->get_plugin_name(), $this->get_version());
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-		$this->loader->add_action('admin_menu', $plugin_admin, 'wpforms_rest_interface_custom_menu_page');
+		$this->loader->add_action('admin_menu', $plugin_admin, 'rest_interface_for_wpforms_custom_menu_page');
 	}
 
 	/**
@@ -180,9 +180,9 @@ class Wpforms_Rest_Interface
 	private function define_public_hooks()
 	{
 
-		$plugin_public = new Wpforms_Rest_Interface_Public($this->get_plugin_name(), $this->get_version());
+		$plugin_public = new Rest_Interface_For_Wpforms_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action('wpforms_process_entry_save', $plugin_public, 'wpforms_rest_interface_wpforms_submit_hook', 10, 4);
+		$this->loader->add_action('wpforms_process_entry_save', $plugin_public, 'rest_interface_for_wpforms_submit_hook', 10, 4);
 	}
 
 	/**
@@ -211,7 +211,7 @@ class Wpforms_Rest_Interface
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Wpforms_Rest_Interface_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Rest_Interface_For_Wpforms_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader()
 	{
@@ -223,9 +223,9 @@ class Wpforms_Rest_Interface
 	 *
 	 * @since     1.0.0
 	 */
-	public static function get_wpforms_rest_interface_post_settings()
+	public static function get_rest_interface_for_wpforms_post_settings()
 	{
-		return json_decode(get_option('wpforms_rest_interface_settings'));
+		return json_decode(get_option('rest_interface_for_wpforms_settings'));
 	}
 
 	/**
