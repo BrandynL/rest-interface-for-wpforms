@@ -70,7 +70,7 @@ class Rest_Interface_For_Wpforms_Public
 			try {
 				$args = [
 					'method' => 'POST',
-					'body' => json_encode($entry),
+					'body' => $entry,
 				];
 				$resp = wp_remote_post(Rest_Interface_For_Wpforms::get_rest_interface_for_wpforms_post_settings()->endpoint, $args);
 				if (is_wp_error($resp)) {
