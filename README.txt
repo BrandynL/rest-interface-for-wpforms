@@ -33,10 +33,10 @@ Coming soon
 
 == Changelog ==
 
-= 1.0.1 =
-* Plugin rename and bugfixes
+= 1.0.2 =
+* Added additional data to be sent to the endpoint, consisting off the complete wpforms submit data, form data, and field data
 
-= 1.0 =
+= 1.0.1 =
 * Initial plugin released
 
 == Upgrade Notice ==

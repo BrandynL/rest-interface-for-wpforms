@@ -16,7 +16,7 @@
  * Plugin Name:       REST Interface for WPForms
  * Plugin URI:        https://brandynlordi.com/shop/wordpress-plugins/rest-interface-for-wpforms/
  * Description:       A GUI to Post WPforms form entry data to an endpoint of your choice on a per-form basis without writing any code.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Brandyn Lordi
  * Author URI:        https://brandynlordi.com
  * License:           GPL-2.0+
@@ -57,7 +57,7 @@ function rest_interface_for_wpforms_check_dependant_plugins()
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('REST_INTERFACE_FOR_WPFORMS_VERSION', '1.0.0');
+define('REST_INTERFACE_FOR_WPFORMS_VERSION', '1.0.2');
 
 /**
  * Define our wp_options table string identifier for updating
